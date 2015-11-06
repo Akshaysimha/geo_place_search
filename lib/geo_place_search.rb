@@ -18,7 +18,8 @@ class GeoPlaceSearch
     search_results
   end
 
-  def self.search_places_around_zip(postal_code, keyword, api_key, radius=50000)
+  def self.palce_lat_and_log(postal_code)
+    position = []
     uri = URI.parse("http://maps.googleapis.com/maps/api/geocode/json?components=postal_code:"+"#{postal_code}"+"&sensor=false")
     http = Net::HTTP.new(uri.host, 443)
     http.use_ssl = true
@@ -27,8 +28,18 @@ class GeoPlaceSearch
     places = JSON.parse(@response.body)
     place = places["results"].first
     latitude = place["geometry"]["location"]["lat"]
-    longitude = place["geometry"]["location"]["lng"]
+    position << latitude
+    longitude = place["geometry"]["location"]["lng"]    
+    position << longitude
 
+    position
+  end
+
+  def self.search_places_around_zip(postal_code, keyword, api_key, radius=50000)
+
+    pos = self.palce_lat_and_log(postal_code)
+    latitude = pos.first
+    longitude = pos.last
     uri = URI.parse("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{latitude},#{longitude}&radius=#{radius}&keyword=#{keyword}&key=#{api_key}")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true

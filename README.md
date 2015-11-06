@@ -10,6 +10,9 @@ GeoPlaceSearch.search_places(keyword, api_key)
 
 ## returns the Json response of the google key word given
 
+GeoPlaceSearch.palce_lat_and_log(postal_code)
+
+##returns the latitude and longitude of the postal code
 
 GeoPlaceSearch.search_places_around_zip("570004", "palace", "api_key", "radius")
 

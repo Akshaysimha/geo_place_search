@@ -1,7 +1,6 @@
 require 'uri'
 require 'net/http'
 require 'json'
-require 'pry'
 
 class GeoPlaceSearch
   def self.search_places(keyword, api_key)

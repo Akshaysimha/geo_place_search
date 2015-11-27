@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'geo_place_search'
-  s.version     = '1.1.0'
+  s.version     = '1.1.2'
   s.date        = '2015-11-06'
   s.summary     = "get location based on key word"
   s.description = "get location based on key word"
